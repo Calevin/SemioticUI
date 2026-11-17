@@ -8,3 +8,6 @@ docs/.astro/
 .DS_Store
 
 .direnv/
+.seb/bin/
+.seb/seb-audit.db*
+.seb/ACTIVE_ROLE
