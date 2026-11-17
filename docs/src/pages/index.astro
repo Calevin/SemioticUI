@@ -1,0 +1,385 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const htmlSnippet = `<button class="sm-btn sm-btn--warning" type="button">
+  Engage Thrusters
+</button>
+
+<article class="sm-card sm-card--info">
+  <header class="sm-card-header">
+    <h3 class="sm-card-title">Telemetry Module</h3>
+    <span class="sm-code-tag">SEC-04</span>
+  </header>
+  <div class="sm-card-body">
+    <p>Cabin pressure nominal at 101.3 kPa.</p>
+  </div>
+</article>
+
+<semiotic-alert variant="warning" code="WARN-702" heading="Coolant Drift" dismissible>
+  Secondary loop temperature above baseline threshold.
+</semiotic-alert>`;
+
+const thymeleafSnippet = `<button class="sm-btn sm-btn--primary" type="submit" th:text="#{action.submit}">
+  Execute
+</button>
+
+<semiotic-alert
+  th:attr="variant=\${alert.severity}, code=\${alert.code}, heading=\${alert.title}"
+  dismissible
+  hx-on:sm-dismiss="console.log('Alert acknowledged')">
+  <span th:text="\${alert.message}">Diagnostic payload</span>
+</semiotic-alert>`;
+
+const reactSnippet = `import 'semiotic-ui/css';
+import 'semiotic-ui';
+
+export function DiagnosticPanel({ onDismiss }) {
+  return (
+    <article className="sm-card sm-card--danger">
+      <header className="sm-card-header">
+        <h3 className="sm-card-title">Reactor Core</h3>
+        <span className="sm-code-tag">CRIT-01</span>
+      </header>
+      <div className="sm-card-body">
+        <semiotic-alert
+          variant="danger"
+          code="ERR-99"
+          heading="Containment Breach"
+          dismissible
+          onClick={() => {}}
+          ref={(el) => {
+            if (!el) return;
+            el.onsmDismiss = onDismiss;
+          }}>
+          Initiate immediate bulkhead lockdown.
+        </semiotic-alert>
+      </div>
+    </article>
+  );
+}`;
+---
+
+<BaseLayout>
+  <div class="doc-shell">
+    <header class="doc-header">
+      <div class="doc-header-title">
+        <span class="sm-code-tag">DOC-00 // V0.1.0</span>
+        <h1>SEMIOTIC UI SYSTEM</h1>
+        <p class="doc-subtitle">
+          Framework-agnostic Neo-Brutalist UI Kit inspired by Ron Cobb's Semiotic Standard.
+        </p>
+      </div>
+      <div class="doc-header-actions">
+        <button id="theme-toggle" class="sm-btn sm-btn--primary sm-btn--sm" type="button">
+          Toggle Theme: Light / Dark
+        </button>
+      </div>
+    </header>
+
+    <main class="doc-main">
+      <!-- Seccion 01: Botones CSS-First -->
+      <section class="doc-section" aria-labelledby="sec-buttons">
+        <div class="doc-section-head">
+          <span class="sm-code-tag">MOD-01</span>
+          <h2 id="sec-buttons">Buttons (.sm-btn)</h2>
+        </div>
+        <p class="doc-lead">
+          Pure CSS component with zero JavaScript runtime. Supports native <code>&lt;button&gt;</code>,
+          <code>&lt;a&gt;</code>, and <code>&lt;input&gt;</code> elements.
+        </p>
+
+        <div class="doc-stage">
+          <div class="doc-row">
+            <button class="sm-btn" type="button">Default</button>
+            <button class="sm-btn sm-btn--primary" type="button">Primary</button>
+            <button class="sm-btn sm-btn--info" type="button">Info</button>
+            <button class="sm-btn sm-btn--success" type="button">Nominal</button>
+            <button class="sm-btn sm-btn--warning" type="button">Caution</button>
+            <button class="sm-btn sm-btn--danger" type="button">Emergency</button>
+            <button class="sm-btn sm-btn--ghost" type="button">Ghost</button>
+            <button class="sm-btn" type="button" disabled>Disabled</button>
+          </div>
+          <div class="doc-row">
+            <button class="sm-btn sm-btn--sm" type="button">Size SM</button>
+            <button class="sm-btn" type="button">Size MD</button>
+            <button class="sm-btn sm-btn--lg sm-btn--warning" type="button">Size LG</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seccion 02: Tarjetas CSS-First -->
+      <section class="doc-section" aria-labelledby="sec-cards">
+        <div class="doc-section-head">
+          <span class="sm-code-tag">MOD-02</span>
+          <h2 id="sec-cards">Cards (.sm-card)</h2>
+        </div>
+        <p class="doc-lead">
+          Structural panel containers using 2px solid borders, zero radius, and hard offset shadows.
+        </p>
+
+        <div class="doc-grid">
+          <article class="sm-card sm-card--info">
+            <header class="sm-card-header">
+              <h3 class="sm-card-title">Life Support Telemetry</h3>
+              <span class="sm-code-tag">SYS-01</span>
+            </header>
+            <div class="sm-card-body">
+              <p>O2 Partial Pressure: 21.2 kPa. Scrubbers operating at 98.4% efficiency.</p>
+            </div>
+            <footer class="sm-card-footer">
+              <button class="sm-btn sm-btn--ghost sm-btn--sm" type="button">Inspect</button>
+              <button class="sm-btn sm-btn--info sm-btn--sm" type="button">Sync</button>
+            </footer>
+          </article>
+
+          <article class="sm-card sm-card--warning">
+            <header class="sm-card-header">
+              <h3 class="sm-card-title">Airlock Deck B</h3>
+              <span class="sm-code-tag">WARN-12</span>
+            </header>
+            <div class="sm-card-body">
+              <p>Outer seal manual override engaged. Clearance verification required prior to cycling.</p>
+            </div>
+            <footer class="sm-card-footer">
+              <button class="sm-btn sm-btn--warning sm-btn--sm" type="button">Verify Seal</button>
+            </footer>
+          </article>
+        </div>
+      </section>
+
+      <!-- Seccion 03: Web Component interactivo <semiotic-alert> -->
+      <section class="doc-section" aria-labelledby="sec-alerts">
+        <div class="doc-section-head">
+          <span class="sm-code-tag">MOD-03</span>
+          <h2 id="sec-alerts">Interactive Alerts (&lt;semiotic-alert&gt;)</h2>
+        </div>
+        <p class="doc-lead">
+          Native Custom Element with Shadow DOM isolation, ElementInternals accessibility roles,
+          attribute-property reflection, and <code>sm-dismiss</code> / <code>sm-show</code> events.
+        </p>
+
+        <div class="doc-stage doc-stack">
+          <semiotic-alert variant="info" code="NAV-09" heading="Course Plotted">
+            Autopilot locked onto Zeta Reticuli transit corridor.
+          </semiotic-alert>
+
+          <semiotic-alert variant="success" code="PWR-02" heading="Auxiliary Online">
+            Fuel cell array stabilized after cold restart sequence.
+          </semiotic-alert>
+
+          <semiotic-alert
+            id="demo-warning-alert"
+            variant="warning"
+            code="TEMP-404"
+            heading="Thermal Variance"
+            dismissible>
+            Coolant manifold delta exceeded +4.2 C. Acknowledge to clear console flag.
+          </semiotic-alert>
+
+          <semiotic-alert
+            id="demo-danger-alert"
+            variant="danger"
+            code="HULL-911"
+            heading="Pressure Drop"
+            dismissible>
+            Micro-fracture detected in Cargo Bay 03 bulkhead.
+          </semiotic-alert>
+
+          <div class="doc-controls">
+            <button id="restore-alerts" class="sm-btn sm-btn--primary sm-btn--sm" type="button">
+              Restore Dismissed Alerts
+            </button>
+            <span id="event-log" class="sm-code-tag" aria-live="polite">EVENT LOG: IDLE</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seccion 04: Snippets listos para copiar -->
+      <section class="doc-section" aria-labelledby="sec-snippets">
+        <div class="doc-section-head">
+          <span class="sm-code-tag">MOD-04</span>
+          <h2 id="sec-snippets">Integration Snippets</h2>
+        </div>
+
+        <div class="doc-stack">
+          <article class="sm-card">
+            <header class="sm-card-header">
+              <h3 class="sm-card-title">HTML / Static</h3>
+              <span class="sm-code-tag">CDN / UMD</span>
+            </header>
+            <div class="sm-card-body">
+              <pre class="doc-pre"><code>{htmlSnippet}</code></pre>
+            </div>
+          </article>
+
+          <article class="sm-card">
+            <header class="sm-card-header">
+              <h3 class="sm-card-title">Java Thymeleaf + HTMX</h3>
+              <span class="sm-code-tag">SSR</span>
+            </header>
+            <div class="sm-card-body">
+              <pre class="doc-pre"><code>{thymeleafSnippet}</code></pre>
+            </div>
+          </article>
+
+          <article class="sm-card">
+            <header class="sm-card-header">
+              <h3 class="sm-card-title">React / Astro / Vite</h3>
+              <span class="sm-code-tag">ESM</span>
+            </header>
+            <div class="sm-card-body">
+              <pre class="doc-pre"><code>{reactSnippet}</code></pre>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const themeButton = document.getElementById('theme-toggle');
+    const restoreButton = document.getElementById('restore-alerts');
+    const eventLog = document.getElementById('event-log');
+
+    themeButton?.addEventListener('click', () => {
+      const root = document.documentElement;
+      const isDark = root.getAttribute('data-sm-theme') === 'dark';
+      if (isDark) {
+        root.removeAttribute('data-sm-theme');
+      } else {
+        root.setAttribute('data-sm-theme', 'dark');
+      }
+    });
+
+    document.addEventListener('sm-dismiss', (event) => {
+      const detail = event.detail ?? {};
+      if (eventLog) {
+        eventLog.textContent = `EVENT LOG: SM-DISMISS (${detail.variant ?? 'unknown'} // ${detail.code || 'NO-CODE'})`;
+      }
+    });
+
+    document.addEventListener('sm-show', (event) => {
+      const detail = event.detail ?? {};
+      if (eventLog) {
+        eventLog.textContent = `EVENT LOG: SM-SHOW (${detail.variant ?? 'unknown'} // ${detail.code || 'NO-CODE'})`;
+      }
+    });
+
+    restoreButton?.addEventListener('click', () => {
+      const alerts = document.querySelectorAll('semiotic-alert[dismissed]');
+      alerts.forEach((alertEl) => {
+        if (typeof alertEl.show === 'function') {
+          alertEl.show();
+        }
+      });
+    });
+  </script>
+
+  <style>
+    .doc-shell {
+      max-width: 68rem;
+      margin-inline: auto;
+      padding: var(--sm-space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sm-space-6);
+    }
+
+    .doc-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--sm-space-4);
+      padding: var(--sm-space-4);
+      border: var(--sm-border-width-heavy) solid var(--sm-border-color);
+      background-color: var(--sm-bg-surface);
+      box-shadow: var(--sm-shadow-lg);
+    }
+
+    .doc-header-title {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sm-space-2);
+    }
+
+    .doc-subtitle {
+      color: var(--sm-text-secondary);
+      max-width: 52ch;
+    }
+
+    .doc-main {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sm-space-6);
+    }
+
+    .doc-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sm-space-3);
+    }
+
+    .doc-section-head {
+      display: flex;
+      align-items: center;
+      gap: var(--sm-space-2);
+      padding-block-end: var(--sm-space-2);
+      border-block-end: var(--sm-border-width) solid var(--sm-border-color);
+    }
+
+    .doc-lead {
+      color: var(--sm-text-secondary);
+    }
+
+    .doc-stage {
+      padding: var(--sm-space-4);
+      border: var(--sm-border-width) solid var(--sm-border-color);
+      background-color: var(--sm-bg-surface);
+      box-shadow: var(--sm-shadow-sm);
+    }
+
+    .doc-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--sm-space-3);
+    }
+
+    .doc-row + .doc-row {
+      margin-block-start: var(--sm-space-4);
+      padding-block-start: var(--sm-space-4);
+      border-block-start: 1px dashed var(--sm-border-color);
+    }
+
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      gap: var(--sm-space-4);
+    }
+
+    .doc-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sm-space-4);
+    }
+
+    .doc-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--sm-space-3);
+      padding-block-start: var(--sm-space-2);
+    }
+
+    .doc-pre {
+      margin: 0;
+      padding: var(--sm-space-3);
+      overflow-x: auto;
+      border: var(--sm-border-width) solid var(--sm-border-color);
+      background-color: var(--sm-bg-canvas);
+      font-size: 0.8125rem;
+      line-height: 1.45;
+    }
+  </style>
+</BaseLayout>

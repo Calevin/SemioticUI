@@ -1,0 +1,137 @@
+@layer sm.components {
+  .sm-btn {
+    --_btn-bg: var(--sm-bg-surface);
+    --_btn-fg: var(--sm-text-primary);
+    --_btn-border: var(--sm-border-color);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sm-space-2);
+    min-height: 2.5rem;
+    padding-block: var(--sm-space-2);
+    padding-inline: var(--sm-space-4);
+    border: var(--sm-border-width) solid var(--_btn-border);
+    border-radius: var(--sm-radius);
+    background-color: var(--_btn-bg);
+    color: var(--_btn-fg);
+    box-shadow: var(--sm-shadow-md);
+    font-family: var(--sm-font-mono);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      transform var(--sm-transition-fast),
+      box-shadow var(--sm-transition-fast),
+      background-color var(--sm-transition-fast);
+  }
+
+  /* Usamos :not() explicito para que el hover no sobre-coincida con estados deshabilitados */
+  .sm-btn:hover:not(:disabled, [aria-disabled='true']) {
+    transform: translate(-1px, -1px);
+    box-shadow: var(--sm-shadow-lg);
+  }
+
+  .sm-btn:active:not(:disabled, [aria-disabled='true']) {
+    transform: translate(2px, 2px);
+    box-shadow: var(--sm-shadow-sm);
+  }
+
+  .sm-btn:focus-visible {
+    outline: var(--sm-focus-width) solid var(--sm-focus-color);
+    outline-offset: var(--sm-focus-offset);
+  }
+
+  .sm-btn:disabled,
+  .sm-btn[aria-disabled='true'] {
+    opacity: 0.52;
+    box-shadow: var(--sm-shadow-none);
+    cursor: not-allowed;
+  }
+
+  /* Variantes semanticas Semiotic Standard */
+  .sm-btn--primary {
+    --_btn-bg: var(--sm-bg-inverse);
+    --_btn-fg: var(--sm-text-inverse);
+  }
+
+  .sm-btn--warning {
+    --_btn-bg: var(--sm-color-warning);
+    --_btn-fg: var(--sm-palette-carbon-950);
+  }
+
+  .sm-btn--warning:hover:not(:disabled, [aria-disabled='true']) {
+    --_btn-bg: var(--sm-color-warning-hover);
+  }
+
+  .sm-btn--danger {
+    --_btn-bg: var(--sm-color-danger);
+    --_btn-fg: var(--sm-palette-ivory-50);
+  }
+
+  .sm-btn--danger:hover:not(:disabled, [aria-disabled='true']) {
+    --_btn-bg: var(--sm-color-danger-hover);
+  }
+
+  .sm-btn--success {
+    --_btn-bg: var(--sm-color-success);
+    --_btn-fg: var(--sm-palette-ivory-50);
+  }
+
+  .sm-btn--success:hover:not(:disabled, [aria-disabled='true']) {
+    --_btn-bg: var(--sm-color-success-hover);
+  }
+
+  .sm-btn--info {
+    --_btn-bg: var(--sm-color-info);
+    --_btn-fg: var(--sm-palette-ivory-50);
+  }
+
+  .sm-btn--info:hover:not(:disabled, [aria-disabled='true']) {
+    --_btn-bg: var(--sm-color-info-hover);
+  }
+
+  .sm-btn--ghost {
+    --_btn-bg: transparent;
+    box-shadow: var(--sm-shadow-none);
+    border-style: dashed;
+  }
+
+  .sm-btn--ghost:hover:not(:disabled, [aria-disabled='true']) {
+    --_btn-bg: var(--sm-bg-surface-muted);
+    border-style: solid;
+    transform: none;
+    box-shadow: var(--sm-shadow-sm);
+  }
+
+  /* Escala de tamanos */
+  .sm-btn--sm {
+    min-height: 2rem;
+    padding-block: var(--sm-space-1);
+    padding-inline: var(--sm-space-3);
+    font-size: 0.75rem;
+  }
+
+  .sm-btn--lg {
+    min-height: 3rem;
+    padding-block: var(--sm-space-3);
+    padding-inline: var(--sm-space-5);
+    font-size: 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sm-btn {
+      transition: none;
+    }
+
+    .sm-btn:hover:not(:disabled, [aria-disabled='true']),
+    .sm-btn:active:not(:disabled, [aria-disabled='true']) {
+      transform: none;
+    }
+  }
+}

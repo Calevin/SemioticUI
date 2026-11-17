@@ -1,0 +1,112 @@
+@layer sm.reset {
+  /* Evitamos el selector universal (*) para no bloquear estilos encapsulados de Web Components */
+  :where(
+    html,
+    body,
+    main,
+    section,
+    article,
+    aside,
+    header,
+    footer,
+    nav,
+    div,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    ol,
+    li,
+    figure,
+    figcaption,
+    blockquote,
+    pre,
+    code,
+    form,
+    fieldset,
+    label,
+    input,
+    textarea,
+    select,
+    button,
+    table,
+    thead,
+    tbody,
+    tr,
+    th,
+    td
+  ) {
+    box-sizing: border-box;
+  }
+
+  :where(body) {
+    margin: 0;
+    background-color: var(--sm-bg-canvas);
+    color: var(--sm-text-primary);
+    font-family: var(--sm-font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    margin-block: 0;
+    font-family: var(--sm-font-mono);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+
+  :where(p) {
+    margin-block: 0;
+  }
+
+  :where(code, pre, kbd, samp) {
+    font-family: var(--sm-font-mono);
+  }
+}
+
+@layer sm.base {
+  /* Etiqueta tecnica alfanumerica estilo panel de ingenieria */
+  .sm-code-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sm-space-1);
+    padding-block: 0.125rem;
+    padding-inline: var(--sm-space-2);
+    border: var(--sm-border-width) solid var(--sm-border-color);
+    background-color: var(--sm-bg-surface-muted);
+    color: var(--sm-text-primary);
+    font-family: var(--sm-font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  /* Oculta Custom Elements no registrados evitando FOUC, con apertura garantizada tras 2s si falla el script */
+  semiotic-alert:not(:defined) {
+    visibility: hidden;
+    opacity: 0;
+    animation: sm-defined-fallback 0.15s 2s forwards;
+  }
+
+  @keyframes sm-defined-fallback {
+    to {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    semiotic-alert:not(:defined) {
+      animation: none;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}

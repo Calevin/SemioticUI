@@ -1,0 +1,35 @@
+---
+/* Importamos las hojas base directamente en el servidor para evitar parpadeo sin estilos (FOUC) */
+import '../../../src/css/tokens.css';
+import '../../../src/css/base.css';
+import '../../../src/css/buttons.css';
+import '../../../src/css/cards.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Semiotic UI // Technical Design System',
+  description = 'Framework-agnostic Neo-Brutalist UI Kit inspired by Ron Cobb Semiotic Standard.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <slot />
+
+    <!-- Registramos los Web Components nativos en el cliente -->
+    <script>
+      import 'semiotic-ui';
+    </script>
+  </body>
+</html>

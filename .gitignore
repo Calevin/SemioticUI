@@ -1,0 +1,10 @@
+node_modules/
+dist/
+docs/dist/
+docs/.astro/
+.env
+.env.*
+*.log
+.DS_Store
+
+.direnv/

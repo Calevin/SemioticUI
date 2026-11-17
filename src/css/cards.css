@@ -1,0 +1,79 @@
+@layer sm.components {
+  .sm-card {
+    --_card-accent: var(--sm-border-color);
+
+    display: flex;
+    flex-direction: column;
+    border: var(--sm-border-width) solid var(--sm-border-color);
+    border-radius: var(--sm-radius);
+    background-color: var(--sm-bg-surface);
+    color: var(--sm-text-primary);
+    box-shadow: var(--sm-shadow-md);
+  }
+
+  .sm-card-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sm-space-2);
+    padding-block: var(--sm-space-3);
+    padding-inline: var(--sm-space-4);
+    border-block-end: var(--sm-border-width) solid var(--sm-border-color);
+    border-inline-start: 6px solid var(--_card-accent);
+    background-color: var(--sm-bg-surface-muted);
+  }
+
+  .sm-card-title {
+    margin: 0;
+    font-family: var(--sm-font-mono);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .sm-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sm-space-3);
+    padding: var(--sm-space-4);
+    flex: 1 1 auto;
+  }
+
+  .sm-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--sm-space-2);
+    padding-block: var(--sm-space-3);
+    padding-inline: var(--sm-space-4);
+    border-block-start: var(--sm-border-width) solid var(--sm-border-color);
+    background-color: var(--sm-bg-surface);
+  }
+
+  /* Variantes de senalizacion industrial en cabecera */
+  .sm-card--info {
+    --_card-accent: var(--sm-color-info);
+  }
+
+  .sm-card--success {
+    --_card-accent: var(--sm-color-success);
+  }
+
+  .sm-card--warning {
+    --_card-accent: var(--sm-color-warning);
+  }
+
+  .sm-card--danger {
+    --_card-accent: var(--sm-color-danger);
+  }
+
+  .sm-card--compact .sm-card-header,
+  .sm-card--compact .sm-card-body,
+  .sm-card--compact .sm-card-footer {
+    padding-block: var(--sm-space-2);
+    padding-inline: var(--sm-space-3);
+  }
+}

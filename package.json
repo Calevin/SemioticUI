@@ -1,0 +1,40 @@
+{
+  "name": "semiotic-ui",
+  "version": "0.1.0",
+  "description": "Framework-agnostic Neo-Brutalist UI Kit inspired by Ron Cobb's Semiotic Standard.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": [
+    "**/*.css",
+    "./src/index.js"
+  ],
+  "main": "./dist/semiotic-ui.umd.js",
+  "module": "./dist/semiotic-ui.es.js",
+  "style": "./dist/semiotic-ui.css",
+  "exports": {
+    ".": {
+      "import": "./dist/semiotic-ui.es.js",
+      "require": "./dist/semiotic-ui.umd.js"
+    },
+    "./css": "./dist/semiotic-ui.css",
+    "./tokens.css": "./src/css/tokens.css"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "workspaces": [
+    "docs"
+  ],
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "preview": "vite preview",
+    "docs:dev": "npm --workspace=docs run dev",
+    "docs:build": "npm --workspace=docs run build",
+    "docs:preview": "npm --workspace=docs run preview"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

@@ -1,0 +1,117 @@
+/* Orden explicito de capas CSS para evitar conflictos de especificidad con consumidores */
+@layer sm.reset, sm.tokens, sm.base, sm.components;
+
+@layer sm.tokens {
+  :root {
+    color-scheme: light dark;
+
+    /* Tier 1: Paleta literal inspirada en el Semiotic Standard (Ron Cobb / Nostromo) */
+    --sm-palette-ivory-50: #f4f1ea;
+    --sm-palette-ivory-100: #e8e2d3;
+    --sm-palette-ivory-200: #d5cdba;
+
+    --sm-palette-carbon-950: #111315;
+    --sm-palette-carbon-900: #1b1e22;
+    --sm-palette-carbon-800: #262b30;
+    --sm-palette-carbon-700: #3d444d;
+    --sm-palette-carbon-500: #69727d;
+
+    --sm-palette-amber-400: #f5b700;
+    --sm-palette-amber-500: #d99b00;
+    --sm-palette-amber-100: #fef3c7;
+
+    --sm-palette-red-500: #d62828;
+    --sm-palette-red-600: #b01c1c;
+    --sm-palette-red-100: #fde2e2;
+
+    --sm-palette-green-500: #1f8a4c;
+    --sm-palette-green-600: #166a39;
+    --sm-palette-green-100: #dcfce7;
+
+    --sm-palette-cyan-500: #0f6cbd;
+    --sm-palette-cyan-600: #0a5291;
+    --sm-palette-cyan-100: #dbeafe;
+
+    /* Tier 2: Tokens semanticos de superficie, texto e interaccion (modo claro por defecto) */
+    --sm-bg-canvas: var(--sm-palette-ivory-100);
+    --sm-bg-surface: var(--sm-palette-ivory-50);
+    --sm-bg-surface-muted: var(--sm-palette-ivory-200);
+    --sm-bg-inverse: var(--sm-palette-carbon-950);
+
+    --sm-text-primary: var(--sm-palette-carbon-950);
+    --sm-text-secondary: var(--sm-palette-carbon-700);
+    --sm-text-muted: var(--sm-palette-carbon-500);
+    --sm-text-inverse: var(--sm-palette-ivory-50);
+
+    /* Colores de estado e iconografia industrial */
+    --sm-color-info: var(--sm-palette-cyan-500);
+    --sm-color-info-hover: var(--sm-palette-cyan-600);
+    --sm-color-info-surface: var(--sm-palette-cyan-100);
+
+    --sm-color-success: var(--sm-palette-green-500);
+    --sm-color-success-hover: var(--sm-palette-green-600);
+    --sm-color-success-surface: var(--sm-palette-green-100);
+
+    --sm-color-warning: var(--sm-palette-amber-400);
+    --sm-color-warning-hover: var(--sm-palette-amber-500);
+    --sm-color-warning-surface: var(--sm-palette-amber-100);
+
+    --sm-color-danger: var(--sm-palette-red-500);
+    --sm-color-danger-hover: var(--sm-palette-red-600);
+    --sm-color-danger-surface: var(--sm-palette-red-100);
+
+    /* Geometria Neo-Brutalista: bordes gruesos, esquinas rectas, sombras duras sin difuminado */
+    --sm-border-color: var(--sm-palette-carbon-950);
+    --sm-border-width: 2px;
+    --sm-border-width-heavy: 3px;
+    --sm-radius: 0px;
+
+    --sm-shadow-sm: 2px 2px 0 0 var(--sm-border-color);
+    --sm-shadow-md: 4px 4px 0 0 var(--sm-border-color);
+    --sm-shadow-lg: 6px 6px 0 0 var(--sm-border-color);
+    --sm-shadow-none: 0 0 0 0 transparent;
+
+    /* Tipografia tecnica */
+    --sm-font-mono: 'JetBrains Mono', 'IBM Plex Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+    --sm-font-sans: 'Space Grotesk', 'IBM Plex Sans', 'Inter', system-ui, -apple-system, sans-serif;
+
+    /* Escala de espaciado */
+    --sm-space-1: 0.25rem;
+    --sm-space-2: 0.5rem;
+    --sm-space-3: 0.75rem;
+    --sm-space-4: 1rem;
+    --sm-space-5: 1.5rem;
+    --sm-space-6: 2rem;
+
+    /* Foco accesible de alto contraste */
+    --sm-focus-color: var(--sm-palette-cyan-500);
+    --sm-focus-width: 3px;
+    --sm-focus-offset: 2px;
+
+    /* Transiciones mecanicas breves y precisas */
+    --sm-transition-fast: 80ms steps(2, end);
+  }
+
+  /* Variante oscura de consola CRT / puente industrial */
+  :root[data-sm-theme='dark'],
+  .sm-theme-dark {
+    color-scheme: dark;
+
+    --sm-bg-canvas: var(--sm-palette-carbon-950);
+    --sm-bg-surface: var(--sm-palette-carbon-900);
+    --sm-bg-surface-muted: var(--sm-palette-carbon-800);
+    --sm-bg-inverse: var(--sm-palette-ivory-50);
+
+    --sm-text-primary: var(--sm-palette-ivory-50);
+    --sm-text-secondary: var(--sm-palette-ivory-200);
+    --sm-text-muted: #9aa3ae;
+    --sm-text-inverse: var(--sm-palette-carbon-950);
+
+    --sm-border-color: var(--sm-palette-ivory-100);
+
+    --sm-color-info-surface: #132a42;
+    --sm-color-success-surface: #122d1f;
+    --sm-color-warning-surface: #332708;
+    --sm-color-danger-surface: #3b1315;
+  }
+}
