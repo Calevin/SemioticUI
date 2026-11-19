@@ -11,6 +11,12 @@
       "verifier_hash": "69c876140d588976c217898474f39fd3dfa98f186e3f587001dbdd0c1bb916d3",
       "verified": true,
       "commit_hash": "c54de3a"
+    },
+    "003_autoregistro_import_bare": {
+      "spec_hash": "7be12eec70041952457b84a147a1ced76e3f94899da7587773342d59c009ec2a",
+      "verifier_hash": "f82c877cba46772c385a4d44b17a9648ad00e45ee8c04a6ba6d2578a7f59292f",
+      "verified": true,
+      "commit_hash": "4609ca0"
     }
   }
 }

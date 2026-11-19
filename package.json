@@ -6,7 +6,8 @@
   "license": "MIT",
   "sideEffects": [
     "**/*.css",
-    "./src/index.js"
+    "./src/index.js",
+    "./dist/*.js"
   ],
   "main": "./dist/semiotic-ui.umd.js",
   "module": "./dist/semiotic-ui.es.js",
