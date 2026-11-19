@@ -4,7 +4,13 @@
       "spec_hash": "4c7cfa1a616614232f6e1faf0e22e9cc2ccfb5d15d33fdfd06cddf950c2b46f0",
       "verifier_hash": "cfc86d8caccc246a5d0292d930f3969b0b726b2f3e5e71c60018431b97ea2a5c",
       "verified": true,
-      "commit_hash": "6fa86a0"
+      "commit_hash": "c54de3a"
+    },
+    "002_coherencia_documento_diseno": {
+      "spec_hash": "444571e956f0754c2acce49f73b2524cfbd16883d45d859c4ba65331b6941d1d",
+      "verifier_hash": "69c876140d588976c217898474f39fd3dfa98f186e3f587001dbdd0c1bb916d3",
+      "verified": true,
+      "commit_hash": "c54de3a"
     }
   }
 }
