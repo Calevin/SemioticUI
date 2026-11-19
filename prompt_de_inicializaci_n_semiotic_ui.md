@@ -1,10 +1,5 @@
 # Prompt de Inicialización: Semiotic UI Kit
 
-Copia y pega el siguiente prompt en tu agente de código (Cursor, Windsurf, Claude Code, Cline, etc.) dentro de una carpeta vacía llamada `semiotic-ui`:
-
----
-
-```text
 Actúa como un Arquitecto Frontend Senior especializado en Design Systems agnósticos, Web Components nativos, CSS moderno y Astro.
 
 Vamos a inicializar el proyecto `semiotic-ui`, un UI Kit personal de estilo Neo-Brutalista inspirado en el "Semiotic Standard" de Ron Cobb (iconografía industrial de ciencia ficción de los años 70/80, alto contraste, bordes sólidos, sombras duras sin difuminado, tipografía monoespaciada, etiquetas técnicas/numéricas y paleta industrial con colores de advertencia).
@@ -46,6 +41,3 @@ Crea un archivo `AGENT.md` en la raíz del repositorio que servirá como constit
 - **Convenciones de Código:** Nomenclatura de CSS Custom Properties (`--sm-*`), clases (`.sm-*`), y etiquetas de Web Components (`<semiotic-*>`).
 - **Flujo de Creación de Componentes:** Pasos obligatorios cada vez que se pida un nuevo componente (1. Implementar en `/src`, 2. Exportar en `index.js`, 3. Documentar con ejemplo interactivo en `/docs`, 4. Verificar build con Vite).
 - **Comandos clave:** Build, dev de librería y dev de documentación.
-
-Comienza ejecutando la Tarea 1 y la Tarea 2 de forma ordenada, explicando brevemente las decisiones tomadas al finalizar.
-```
