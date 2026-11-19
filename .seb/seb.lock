@@ -1,0 +1,10 @@
+{
+  "tasks": {
+    "001_suite_calidad_tests_lint": {
+      "spec_hash": "4c7cfa1a616614232f6e1faf0e22e9cc2ccfb5d15d33fdfd06cddf950c2b46f0",
+      "verifier_hash": "cfc86d8caccc246a5d0292d930f3969b0b726b2f3e5e71c60018431b97ea2a5c",
+      "verified": true,
+      "commit_hash": "6fa86a0"
+    }
+  }
+}
