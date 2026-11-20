@@ -1,0 +1,123 @@
+/* Sidebar de navegacion lateral CSS-first (Spec 004): sin estado, sin JavaScript y sin tokens propios */
+@layer sm.components {
+  /* Contenedor de navegacion: columna de grupos sobre superficie clara */
+  .sm-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sm-space-4);
+    min-width: 0;
+    padding-block: var(--sm-space-4);
+    border: var(--sm-border-width-heavy) solid var(--sm-border-color);
+    border-radius: var(--sm-radius);
+    background-color: var(--sm-bg-surface);
+    color: var(--sm-text-primary);
+    box-shadow: var(--sm-shadow-md);
+  }
+
+  /* Grupo de navegacion: no reserva espacio para la etiqueta, que declara su propio espaciado */
+  .sm-sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  /* Reset de listas con especificidad cero para no competir con el consumidor */
+  :where(.sm-sidebar-menu) :where(ul, ol, li) {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sm-sidebar-label {
+    display: block;
+    margin: 0;
+    padding-block: var(--sm-space-2);
+    padding-inline: var(--sm-space-4);
+    color: var(--sm-text-secondary);
+    font-family: var(--sm-font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+
+  /* Item enlazable: ocupa todo el ancho y reserva la franja lateral para no saltar al activarse */
+  .sm-sidebar-item {
+    display: block;
+    padding-block: var(--sm-space-2);
+    padding-inline: var(--sm-space-4);
+    border-inline-start: 6px solid transparent;
+    background-color: var(--sm-bg-surface);
+    color: var(--sm-text-primary);
+    font-size: 0.9375rem;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition:
+      background-color var(--sm-transition-fast),
+      color var(--sm-transition-fast);
+  }
+
+  /* Hover sobre cualquier item habilitado, incluido el activo, que conserva su franja */
+  .sm-sidebar-item:hover:not([aria-disabled='true']) {
+    background-color: var(--sm-bg-surface-muted);
+    color: var(--sm-text-primary);
+  }
+
+  /* Contorno hacia adentro para que el foco no quede recortado por el borde del Sidebar */
+  .sm-sidebar-item:focus-visible {
+    outline: var(--sm-focus-width) solid var(--sm-focus-color);
+    outline-offset: calc(var(--sm-focus-width) * -1);
+  }
+
+  /* Franja de ubicacion: tambien se conserva en un item activo y deshabilitado */
+  .sm-sidebar-item[aria-current='page'] {
+    border-inline-start-color: var(--sm-color-warning);
+  }
+
+  /* Bloque invertido del item activo; excluye hover y deshabilitado para no depender del orden */
+  .sm-sidebar-item[aria-current='page']:not([aria-disabled='true'], :hover) {
+    background-color: var(--sm-bg-inverse);
+    color: var(--sm-text-inverse);
+  }
+
+  /* Deshabilitado solo visual: la activacion es responsabilidad del consumidor (sin href) */
+  .sm-sidebar-item[aria-disabled='true'] {
+    color: var(--sm-text-secondary);
+    cursor: not-allowed;
+  }
+
+  /* Layout de dos regiones medido sobre su propio ancho */
+  .sm-sidebar-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sm-space-5);
+    align-items: flex-start;
+    container-type: inline-size;
+    container-name: sm-sidebar-layout;
+  }
+
+  /* Disposicion apilada por defecto: el Sidebar, primer hijo, queda arriba */
+  .sm-sidebar-layout > .sm-sidebar,
+  .sm-sidebar-layout > :not(.sm-sidebar) {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  /* Disposicion horizontal: Sidebar de ancho fijo a la izquierda y contenido con el resto */
+  @container sm-sidebar-layout (width >= 48rem) {
+    .sm-sidebar-layout > .sm-sidebar {
+      flex: 0 0 16rem;
+    }
+
+    .sm-sidebar-layout > :not(.sm-sidebar) {
+      flex: 1 1 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sm-sidebar-item {
+      transition: none;
+    }
+  }
+}

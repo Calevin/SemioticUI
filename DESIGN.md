@@ -235,6 +235,7 @@ Usa siempre la escala. Si necesitas un valor fuera de ella, probablemente el lay
 | `.sm-code-tag` | Clase CSS | Disponible |
 | `.sm-btn` | Clase CSS | Disponible |
 | `.sm-card` | Clase CSS | Disponible |
+| `.sm-sidebar` | Clase CSS | Disponible |
 | `<semiotic-alert>` | Web Component | Disponible |
 | Reset base de tipografía (`body`, `h1`–`h6`, `p`, `code`) | CSS global en capa | Disponible |
 
@@ -391,6 +392,38 @@ Web Component con Shadow DOM para mensajes de estado, con cierre opcional. Confi
 | `registerAll()` | Registra todos los Web Components; idempotente y seguro en SSR |
 | `registerSemioticAlert()` | Registra solo `<semiotic-alert>` |
 | `SemioticAlert` | Clase del Custom Element, para extender o tipar |
+
+### 7.7 Navegación lateral (Sidebar)
+
+Menú lateral sin estado, solo con clases sobre `<nav>`, listas y enlaces nativos. No usa JavaScript: el consumidor marca el item activo y el deshabilitado con atributos ARIA.
+
+```html
+<div class="sm-sidebar-layout">
+  <nav class="sm-sidebar" aria-label="Documentation">
+    <div class="sm-sidebar-menu">
+      <h2 class="sm-sidebar-label" id="nav-start">Getting started</h2>
+      <ul aria-labelledby="nav-start">
+        <li><a class="sm-sidebar-item" href="/introduction" aria-current="page">Introduction</a></li>
+        <li><a class="sm-sidebar-item" aria-disabled="true">Changelog</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main>Contenido principal</main>
+</div>
+```
+
+| Clase | Uso |
+| :--- | :--- |
+| `.sm-sidebar` | Contenedor de navegación (`<nav>` con `aria-label`): columna de grupos con borde estructural |
+| `.sm-sidebar-menu` | Grupo de navegación: etiqueta opcional y una lista de items |
+| `.sm-sidebar-label` | Rótulo del grupo en monoespaciada mayúscula; dale un `id` y referencialo desde la lista con `aria-labelledby` |
+| `.sm-sidebar-item` | Enlace de ancho completo; `aria-current="page"` lo marca activo (bloque invertido y franja ámbar) y `aria-disabled="true"` lo atenúa |
+| `.sm-sidebar-layout` | Composición de dos regiones: Sidebar de `16rem` a la izquierda desde `48rem` de ancho del propio layout, apilado por debajo |
+
+- El Sidebar tiene que ser el **primer hijo** de `.sm-sidebar-layout`; el segundo hijo es el contenido principal.
+- El deshabilitado es solo visual: un enlace con `aria-disabled="true"` sigue siendo activable, así que omite su `href`.
+- La librería no calcula el item activo según la URL: márcalo en el servidor o en el componente del framework.
+- Sin colapsar/expandir, sin `sticky` y sin submenús: si los necesitas, constrúyelos en el proyecto con prefijo propio.
 
 <!-- /design-check:inventory -->
 

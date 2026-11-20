@@ -2,6 +2,7 @@ import './css/tokens.css';
 import './css/base.css';
 import './css/buttons.css';
 import './css/cards.css';
+import './css/sidebar.css';
 
 import { SemioticAlert, registerSemioticAlert } from './components/semiotic-alert.js';
 

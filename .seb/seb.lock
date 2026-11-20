@@ -17,6 +17,12 @@
       "verifier_hash": "f82c877cba46772c385a4d44b17a9648ad00e45ee8c04a6ba6d2578a7f59292f",
       "verified": true,
       "commit_hash": "4609ca0"
+    },
+    "004_componente_sidebar": {
+      "spec_hash": "70e74a194baa49548bf5dddcb13995772bf935f250f39bef01b867ad77fa83c0",
+      "verifier_hash": "c504aa7d8c87b7acae8628b68d05bd98713a5fa01b03f0f156f86c1224a0dc37",
+      "verified": true,
+      "commit_hash": "4178cb8"
     }
   }
 }
