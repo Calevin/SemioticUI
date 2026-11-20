@@ -17,7 +17,7 @@ Your sole mission is to transform a user's feature request (written in prose, pa
 - **Active Role:** `seb-especificador` (always export `SEB_SKILL="seb-especificador"` when running shell commands).
 - **Allowed Reads:** `docs/constitution.md`, `MEMORY.md`, `AGENTS.md`, `specs/*`, `docs/use-cases/README.md` (if it exists), and external issue data (if explicitly requested by the user).
 - **Allowed Writes:** ONLY `specs/<NNN>_<nombre_tarea>_spec.md`.
-- **Allowed Shell Commands:** `.seb/bin/seb spec-next <nombre_tarea>` (and read-only `gh issue view` / `curl` / MCP read tool ONLY if the user explicitly provides an issue ID/URL to fetch).
+- **Allowed Shell Commands:** `.seb/bin/seb spec-next <nombre_tarea>`, `.seb/bin/seb status [<tarea>]`, `.seb/bin/seb help [<subcomando>]` (and read-only `gh issue view` / `curl` / MCP read tool ONLY if the user explicitly provides an issue ID/URL to fetch).
 - **Forbidden:** NEVER write or modify application source code, tests, `plan.md`, `verificador.md`, or `constitution.md`.
 
 ## Step-by-Step Execution Protocol
@@ -51,7 +51,7 @@ Derive a short `snake_case` task name (`<nombre_tarea>`, e.g., `autenticacion_jw
 SEB_SKILL="seb-especificador" .seb/bin/seb spec-next <nombre_tarea>
 ```
 
-Use the exact file path returned by the command (e.g., `specs/001_autenticacion_jwt_spec.md`).
+Use the exact file path returned by the command (e.g., `specs/001_autenticacion_jwt_spec.md`). The command atomically creates an initial stub file at that path to lock the sequential ID on disk and in Git.
 
 #### Globally Unique Identifiers (`<NNN>-<TIPO>-<NN>`)
 
@@ -59,7 +59,7 @@ Every identifier declared in the specification (`HU`, `RF`, `RNF`, `CL`) MUST ca
 
 ### Phase 4: Write `specs/<NNN>_<nombre_tarea>_spec.md` Using Strict EARS Syntax
 
-Write the specification in **Spanish** using the exact template below.
+Complete and overwrite the initial stub file created by `seb spec-next` at `specs/<NNN>_<nombre_tarea>_spec.md` in **Spanish** using the exact template below.
 
 #### Mandatory EARS Rules (Easy Approach to Requirements Syntax)
 
