@@ -1,0 +1,57 @@
+---
+// Pagina "Installation" (005-RF-14, 005-RF-15): nombres, especificadores y version salen de package.json
+import DocsLayout from '../layouts/DocsLayout.astro';
+import CodeBlock from '../components/CodeBlock.astro';
+import pkg from '../../../package.json';
+import { CSS_SPECIFIER, SCRIPT_SPECIFIER, importStatement } from '../catalog/imports.js';
+
+// Artefactos publicados: hoja compilada (exports de la hoja) y script clasico UMD (main)
+const stripDot = (path: string) => path.replace(/^\.\//, '');
+const cssArtifact = stripDot(pkg.exports[`.${CSS_SPECIFIER.slice(pkg.name.length)}`]);
+const umdArtifact = stripDot(pkg.main);
+const cdnBase = `https://cdn.jsdelivr.net/npm/${pkg.name}@${pkg.version}`;
+
+const steps = [
+  {
+    title: 'Install the package',
+    text: `Add ${pkg.name} to your project from the npm registry.`,
+    code: `npm install ${pkg.name}`,
+  },
+  {
+    title: 'Import it from a bundler application',
+    text: 'Import the library once in your entry module to register the Web Components, and import the compiled stylesheet.',
+    code: [importStatement(SCRIPT_SPECIFIER), importStatement(CSS_SPECIFIER)].join('\n'),
+  },
+  {
+    title: 'Or load it with classic tags from a CDN',
+    text: `Without a bundler, link the stylesheet and the UMD script of version ${pkg.version}. The script registers the components on load; serve the same files from your own server if you prefer.`,
+    code: [`<link rel="stylesheet" href="${cdnBase}/${cssArtifact}">`, `<script src="${cdnBase}/${umdArtifact}"></script>`].join('\n'),
+  },
+  {
+    title: 'Use the components',
+    text: 'Write plain markup with the library classes and elements. Every component page shows its code for HTML, Thymeleaf and React.',
+    code: [
+      '<button class="sm-btn sm-btn--primary" type="button">Execute</button>',
+      '<semiotic-alert variant="info" code="NAV-09" heading="Course Plotted">',
+      '  Autopilot locked onto the transit corridor.',
+      '</semiotic-alert>',
+    ].join('\n'),
+  },
+];
+---
+
+<DocsLayout pageName="Installation" currentPath="/installation/">
+  <h1>Installation</h1>
+  <p class="doc-lead">Step by step guide to consume {pkg.name} {pkg.version} from an application.</p>
+  <ol class="doc-steps">
+    {
+      steps.map((step) => (
+        <li>
+          <p class="doc-step-title">{step.title}</p>
+          <p>{step.text}</p>
+          <CodeBlock code={step.code} />
+        </li>
+      ))
+    }
+  </ol>
+</DocsLayout>

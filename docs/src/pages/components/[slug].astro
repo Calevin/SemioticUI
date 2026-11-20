@@ -1,0 +1,37 @@
+---
+// Una ficha por componente del catalogo (005-RF-16 a 005-RF-23), generada en la compilacion
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPage from '../../components/ComponentPage.astro';
+import { CATALOG, componentUrl } from '../../catalog/index.js';
+
+export function getStaticPaths() {
+  return CATALOG.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+// Solo la ficha de alertas tiene el control de restaurar y el registro de eventos (005-RF-23)
+const hasAlertConsole = entry.piece === '<semiotic-alert>';
+---
+
+<DocsLayout pageName={entry.name} currentPath={componentUrl(entry.slug)} description={entry.what}>
+  <ComponentPage entry={entry}>
+    {
+      hasAlertConsole && (
+        <div class="doc-controls" slot="controls">
+          <button id="restore-alerts" class="sm-btn sm-btn--primary sm-btn--sm" type="button">Restore Dismissed Alerts</button>
+          <span id="event-log" class="sm-code-tag" aria-live="polite">EVENT LOG: IDLE</span>
+        </div>
+      )
+    }
+  </ComponentPage>
+
+  <script>
+    import { initAlertConsole } from '../../scripts/alert-console.js';
+
+    // Sin estado persistido: recargar la ficha restaura todas las alertas (005-CL-02)
+    const restoreButton = document.getElementById('restore-alerts');
+    const eventLog = document.getElementById('event-log');
+    const root = document.getElementById('main-content');
+    if (restoreButton && eventLog && root) initAlertConsole({ root, restoreButton, eventLog });
+  </script>
+</DocsLayout>

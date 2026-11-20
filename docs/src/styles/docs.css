@@ -1,0 +1,203 @@
+/* Estilos propios del sitio de documentacion (Spec 005).
+   Solo tokens semanticos Tier 2 de la libreria: sin colores literales ni custom properties propias,
+   asi el tema oscuro se aplica sin reglas adicionales (005-CL-04). */
+
+/* Enlace de salto: fuera de la vista hasta recibir el foco (005-RF-03) */
+.doc-skip-link {
+  position: absolute;
+  inset-block-start: var(--sm-space-2);
+  inset-inline-start: var(--sm-space-2);
+  z-index: 10;
+  padding: var(--sm-space-2) var(--sm-space-3);
+  border: var(--sm-border-width) solid var(--sm-border-color);
+  background-color: var(--sm-bg-inverse);
+  color: var(--sm-text-inverse);
+  font-family: var(--sm-font-mono);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transform: translateY(-300%);
+}
+
+.doc-skip-link:focus {
+  transform: none;
+  outline: var(--sm-focus-width) solid var(--sm-focus-color);
+  outline-offset: var(--sm-focus-offset);
+}
+
+/* Cabecera del sitio */
+.doc-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sm-space-3);
+  padding: var(--sm-space-3) var(--sm-space-5);
+  border-block-end: var(--sm-border-width-heavy) solid var(--sm-border-color);
+  background-color: var(--sm-bg-surface);
+  box-shadow: var(--sm-shadow-sm);
+}
+
+.doc-header-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sm-space-3);
+}
+
+.doc-brand {
+  margin: 0;
+  font-family: var(--sm-font-mono);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Layout con sidebar: el apilado por debajo de 48rem lo resuelve .sm-sidebar-layout (005-CL-03) */
+.doc-layout {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: var(--sm-space-5);
+}
+
+.doc-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm-space-5);
+}
+
+/* main recibe el foco del enlace de salto; el contorno queda para la navegacion con teclado */
+.doc-main:focus {
+  outline: none;
+}
+
+.doc-main:focus-visible {
+  outline: var(--sm-focus-width) solid var(--sm-focus-color);
+  outline-offset: var(--sm-focus-offset);
+}
+
+.doc-main p,
+.doc-main li {
+  max-width: 72ch;
+}
+
+.doc-lead {
+  color: var(--sm-text-secondary);
+}
+
+/* Getting started */
+.doc-intro {
+  font-size: 1.0625rem;
+}
+
+.doc-channels,
+.doc-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm-space-4);
+  margin: 0;
+  padding-inline-start: var(--sm-space-5);
+}
+
+.doc-steps > li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm-space-2);
+}
+
+.doc-step-title {
+  font-family: var(--sm-font-mono);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Ficha de componente */
+.doc-component,
+.doc-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm-space-3);
+}
+
+.doc-component {
+  gap: var(--sm-space-5);
+}
+
+.doc-description {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm-space-2);
+}
+
+.doc-section > h2 {
+  padding-block-end: var(--sm-space-2);
+  border-block-end: var(--sm-border-width) solid var(--sm-border-color);
+}
+
+.doc-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sm-space-3);
+  padding: var(--sm-space-4);
+  border: var(--sm-border-width) solid var(--sm-border-color);
+  background-color: var(--sm-bg-canvas);
+  box-shadow: var(--sm-shadow-sm);
+}
+
+.doc-preview > .sm-card {
+  flex: 1 1 18rem;
+  max-width: 36rem;
+}
+
+.doc-preview > semiotic-alert,
+.doc-preview > .sm-sidebar-layout {
+  flex: 1 1 100%;
+}
+
+.doc-code,
+.doc-variant {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm-space-2);
+  margin: 0;
+}
+
+.doc-variants {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm-space-5);
+}
+
+.doc-code-caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sm-space-2);
+  color: var(--sm-text-secondary);
+  font-family: var(--sm-font-mono);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+}
+
+.doc-pre {
+  margin: 0;
+  padding: var(--sm-space-3);
+  overflow-x: auto;
+  border: var(--sm-border-width) solid var(--sm-border-color);
+  background-color: var(--sm-bg-surface);
+  color: var(--sm-text-primary);
+  font-family: var(--sm-font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  tab-size: 2;
+}
+
+/* Controles de la ficha de alertas */
+.doc-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sm-space-3);
+}

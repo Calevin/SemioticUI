@@ -5,14 +5,17 @@ import '../../../src/css/base.css';
 import '../../../src/css/buttons.css';
 import '../../../src/css/cards.css';
 import '../../../src/css/sidebar.css';
+import '../styles/docs.css';
+// Fuente del arranque de tema: se inserta tal cual en el head (005-RF-11)
+import bootSource from '../scripts/theme-boot.js?raw';
 
 interface Props {
-  title?: string;
+  title: string;
   description?: string;
 }
 
 const {
-  title = 'Semiotic UI // Technical Design System',
+  title,
   description = 'Framework-agnostic Neo-Brutalist UI Kit inspired by Ron Cobb Semiotic Standard.',
 } = Astro.props;
 ---
@@ -24,13 +27,19 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <!-- Script clasico en linea: aplica el tema guardado antes del primer pintado -->
+    <script is:inline set:html={bootSource} />
   </head>
   <body>
     <slot />
 
-    <!-- Registramos los Web Components nativos en el cliente -->
+    <!-- Registramos los Web Components nativos y conectamos el control de tema -->
     <script>
       import 'semiotic-ui';
+      import { initThemeToggle } from '../scripts/theme.js';
+
+      const themeButton = document.getElementById('theme-toggle');
+      if (themeButton) initThemeToggle(themeButton, document.documentElement, () => window.localStorage);
     </script>
   </body>
 </html>

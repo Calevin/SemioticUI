@@ -1,0 +1,79 @@
+---
+// Plantilla de ficha de componente (005-RF-16 a 005-RF-21). Orden de secciones fijo: title, description,
+// preview, code y variants (solo si hay variantes, 005-RF-19). Preview y snippet HTML salen de la misma
+// cadena: set:html la renderiza y CodeBlock la muestra escapada (005-RF-20, 005-RF-21).
+import CodeBlock from './CodeBlock.astro';
+
+interface Variant {
+  id: string;
+  description?: string;
+  html: string;
+}
+
+interface Props {
+  entry: {
+    name: string;
+    piece: string;
+    what: string;
+    when: string;
+    preview: { html: string; thymeleaf: string; react: string };
+    variants: Variant[];
+  };
+}
+
+const { entry } = Astro.props;
+
+const formats = [
+  { id: 'html', label: 'HTML / Static', tag: 'CDN / UMD' },
+  { id: 'thymeleaf', label: 'Java Thymeleaf + HTMX', tag: 'SSR' },
+  { id: 'react', label: 'React / Astro / Vite', tag: 'ESM' },
+] as const;
+
+// Nombre de la clase o del atributo que distingue cada variante, para el rotulo de su figura
+const variantLabel = (id: string) =>
+  entry.piece.startsWith('<') ? `variant="${id}"` : `${entry.piece}--${id}`;
+---
+
+<article class="doc-component" data-piece={entry.piece}>
+  <h1 data-doc-section="title">{entry.name}</h1>
+  <div data-doc-section="description" class="doc-description">
+    <p data-doc-part="what">{entry.what}</p>
+    <p data-doc-part="when" class="doc-lead">{entry.when}</p>
+  </div>
+  <section data-doc-section="preview" aria-labelledby="preview-title" class="doc-section">
+    <h2 id="preview-title">Preview</h2>
+    <div class="doc-preview" set:html={entry.preview.html} />
+    <slot name="controls" />
+  </section>
+  <section data-doc-section="code" aria-labelledby="code-title" class="doc-section">
+    <h2 id="code-title">Code</h2>
+    {
+      formats.map((format) => (
+        <figure class="doc-code" data-format={format.id}>
+          <figcaption class="doc-code-caption">
+            <span>{format.label}</span>
+            <span class="sm-code-tag">{format.tag}</span>
+          </figcaption>
+          <CodeBlock code={entry.preview[format.id]} />
+        </figure>
+      ))
+    }
+  </section>
+  {
+    entry.variants.length > 0 && (
+      <section data-doc-section="variants" aria-labelledby="variants-title" class="doc-section doc-variants">
+        <h2 id="variants-title">Variants</h2>
+        {entry.variants.map((variant) => (
+          <figure class="doc-variant" data-variant={variant.id}>
+            <figcaption class="doc-code-caption">
+              <span class="sm-code-tag">{variantLabel(variant.id)}</span>
+              {variant.description && <span>{variant.description}</span>}
+            </figcaption>
+            <div class="doc-preview" set:html={variant.html} />
+            <CodeBlock code={variant.html} />
+          </figure>
+        ))}
+      </section>
+    )
+  }
+</article>

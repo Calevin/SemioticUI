@@ -23,6 +23,12 @@
       "verifier_hash": "c504aa7d8c87b7acae8628b68d05bd98713a5fa01b03f0f156f86c1224a0dc37",
       "verified": true,
       "commit_hash": "4178cb8"
+    },
+    "005_navegacion_sitio_docs": {
+      "spec_hash": "ae56eb2ee1a82dfcc2d762d6d74b88919f40294df2f05822333d9fc6007da5fb",
+      "verifier_hash": "969c112ea5fc7e1be9b0189527ec958d8099c4551cf8252083e781d674af85bb",
+      "verified": true,
+      "commit_hash": "28acdc7"
     }
   }
 }

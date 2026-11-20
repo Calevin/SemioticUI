@@ -1,0 +1,45 @@
+---
+// Sidebar de navegacion del sitio (005-RF-05 a 005-RF-09). Atributos de cada item en orden fijo:
+// class, href y aria-current, porque el verificador muta el HTML compilado contando con ese orden.
+import { CATALOG, componentUrl } from '../catalog/index.js';
+
+interface Props {
+  currentPath: string | null;
+}
+
+const { currentPath } = Astro.props;
+
+const gettingStarted = [
+  { label: 'Introduction', href: '/' },
+  { label: 'Installation', href: '/installation/' },
+];
+const components = CATALOG.map((entry) => ({ label: entry.name, href: componentUrl(entry.slug) }));
+const current = (href: string) => (href === currentPath ? 'page' : undefined);
+---
+
+<nav class="sm-sidebar" aria-label="Documentation" data-doc-nav>
+  <div class="sm-sidebar-menu">
+    <h2 class="sm-sidebar-label" id="nav-getting-started">Getting started</h2>
+    <ul aria-labelledby="nav-getting-started">
+      {
+        gettingStarted.map((item) => (
+          <li>
+            <a class="sm-sidebar-item" href={item.href} aria-current={current(item.href)}>{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="sm-sidebar-menu">
+    <h2 class="sm-sidebar-label" id="nav-components">Components</h2>
+    <ul aria-labelledby="nav-components">
+      {
+        components.map((item) => (
+          <li>
+            <a class="sm-sidebar-item" href={item.href} aria-current={current(item.href)}>{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>

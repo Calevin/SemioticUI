@@ -1,0 +1,10 @@
+---
+// Snippet como texto literal (005-RF-21): la interpolacion de Astro escapa el marcado
+interface Props {
+  code: string;
+}
+
+const { code } = Astro.props;
+---
+
+<pre class="doc-pre"><code>{code}</code></pre>

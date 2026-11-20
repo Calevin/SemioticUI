@@ -1,0 +1,12 @@
+---
+// Cabecera del sitio (005-RF-02, 005-RF-10): la version sale de package.json en la compilacion
+import pkg from '../../../package.json';
+---
+
+<header class="doc-header">
+  <div class="doc-header-title">
+    <span class="sm-code-tag">DOC-00 // V{pkg.version}</span>
+    <p class="doc-brand">SEMIOTIC UI SYSTEM</p>
+  </div>
+  <button id="theme-toggle" class="sm-btn sm-btn--primary sm-btn--sm" type="button">Toggle Theme</button>
+</header>

@@ -1,0 +1,26 @@
+---
+// Layout comun de la documentacion (005-RF-01 a 005-RF-04): enlace de salto, cabecera, Sidebar del sitio y main
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+interface Props {
+  pageName: string;
+  // URL de la pagina actual; null en la 404 para no marcar ningun item activo (005-RF-24)
+  currentPath: string | null;
+  description?: string;
+}
+
+const { pageName, currentPath, description } = Astro.props;
+---
+
+<BaseLayout title={`${pageName} // Semiotic UI`} description={description}>
+  <a class="doc-skip-link" href="#main-content">Skip to content</a>
+  <SiteHeader />
+  <div class="sm-sidebar-layout doc-layout">
+    <SiteNav currentPath={currentPath} />
+    <main id="main-content" tabindex="-1" class="doc-main">
+      <slot />
+    </main>
+  </div>
+</BaseLayout>
